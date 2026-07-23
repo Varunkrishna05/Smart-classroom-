@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cognitive Smart Classroom & Adaptive Timetable Ecosystem</title>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js & Three.js Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <div class="brand-container">
+      <div class="brand-logo">
+        <i class="fa-solid fa-brain"></i>
+      </div>
+      <div class="brand-text">
+        <h1>COGNITIVE CLASSROOM</h1>
+        <p><i class="fa-solid fa-bolt"></i> Adaptive Timetable & AI Engine</p>
+      </div>
+    </div>
+
+    <!-- Role Selection Tabs -->
+    <div class="role-switcher">
+      <button class="role-btn active" onclick="switchRole('admin')">
+        <i class="fa-solid fa-user-shield"></i> Admin
+      </button>
+      <button class="role-btn" onclick="switchRole('faculty')">
+        <i class="fa-solid fa-chalkboard-user"></i> Faculty
+      </button>
+      <button class="role-btn" onclick="switchRole('student')">
+        <i class="fa-solid fa-user-graduate"></i> Student
+      </button>
+      <button class="role-btn" onclick="switchRole('parent')">
+        <i class="fa-solid fa-people-roof"></i> Parent
+      </button>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="header-controls">
+      <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+      </button>
+      <button class="icon-btn" title="System Notifications">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+      <div style="display: flex; align-items: center; gap: 0.5rem; border-left: 1px solid var(--border-glass); padding-left: 1rem;">
+        <img src="https://ui-avatars.com/api/?name=Dr.+Aparna+R&background=6366f1&color=fff" alt="User Avatar" style="width: 36px; height: 36px; border-radius: 50%;">
+        <div style="font-size: 0.8rem; text-align: left;">
+          <div style="font-weight: 700;" id="user-display-name">Dr. Aparna R (Admin)</div>
+          <div style="font-size: 0.7rem; color: var(--accent-cyan);" id="user-display-role">System Architect</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Real-Time Ticker Bar -->
+  <div class="system-status-ticker">
+    <div class="status-indicator">
+      <span class="pulse-dot"></span>
+      <span><strong>IoT Hardware Grid:</strong> ESP32 Nodes Online (CR-301, CR-302, CR-303)</span>
+    </div>
+    <div>
+      <span><i class="fa-solid fa-microchip"></i> AI CV Processing: <strong>15 FPS @ 94.2% Accuracy</strong></span>
+    </div>
+    <div>
+      <span><i class="fa-solid fa-cloud"></i> MQTT Protocol: <strong>TLS Port 8883 Connected</strong></span>
+    </div>
+  </div>
+
+  <!-- Main Application Container -->
+  <main class="app-container">
+
+    <!-- ===================================================================
+         1. ADMINISTRATOR DASHBOARD
+         =================================================================== -->
+    <section id="admin-view" class="dashboard-view active">
+      <div class="view-header">
+        <div>
+          <h2><i class="fa-solid fa-chart-line" style="color: var(--accent-primary);"></i> Executive System Control Center</h2>
+          <p>Institutional Telemetry, Resource Utilization & IoT Node Infrastructure</p>
+        </div>
+        <button class="btn-primary" onclick="triggerTimetableOptimization()">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Run Global Adaptive Timetable AI
+        </button>
+      </div>
+
+      <!-- Top Metrics -->
+      <div class="metrics-grid">
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>Cognitive Index</p>
+              <h3>84.2<span style="font-size: 1rem;">/100</span></h3>
+              <span class="metric-trend up"><i class="fa-solid fa-arrow-up"></i> +4.5% this week</span>
+            </div>
+            <div class="metric-icon icon-purple"><i class="fa-solid fa-brain"></i></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>Active Classrooms</p>
+              <h3>18 <span style="font-size: 1rem; color: var(--text-muted);">/ 20</span></h3>
+              <span class="metric-trend up"><i class="fa-solid fa-check"></i> 90% Utilization</span>
+            </div>
+            <div class="metric-icon icon-cyan"><i class="fa-solid fa-school"></i></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>IoT Energy Saved</p>
+              <h3>28.6%</h3>
+              <span class="metric-trend up"><i class="fa-solid fa-leaf"></i> 412 kWh Saved</span>
+            </div>
+            <div class="metric-icon icon-emerald"><i class="fa-solid fa-bolt"></i></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>Students at Risk</p>
+              <h3>4 <span style="font-size: 1rem; color: var(--text-muted);">Students</span></h3>
+              <span class="metric-trend down"><i class="fa-solid fa-triangle-exclamation"></i> Early Alert</span>
+            </div>
+            <div class="metric-icon icon-amber"><i class="fa-solid fa-user-ninja"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Layout: 3D Visualization + Analytics -->
+      <div class="dashboard-main-grid">
+        <div class="glass-card">
+          <div class="card-title-bar">
+            <h3><i class="fa-solid fa-cube" style="color: var(--accent-cyan);"></i> 3D Smart Classroom Spatial Monitor (Three.js)</h3>
+            <span style="font-size: 0.8rem; color: var(--accent-emerald);"><i class="fa-solid fa-signal"></i> Live Sensor Mesh</span>
+          </div>
+          <div id="three-classroom-container"></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted);">
+            <div><i class="fa-solid fa-info-circle"></i> Drag to rotate, scroll to zoom 3D classroom scene. Click desks for student node metrics.</div>
+            <div>Desk Aura Colors: <span style="color: #10b981;">● High Focus</span> | <span style="color: #f59e0b;">● Confused</span> | <span style="color: #f43f5e;">● Distracted</span></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-title-bar">
+            <h3><i class="fa-solid fa-pie-chart" style="color: var(--accent-violet);"></i> Institutional Emotion Breakdown</h3>
+          </div>
+          <div style="height: 280px; position: relative;">
+            <canvas id="adminEmotionChart"></canvas>
+          </div>
+          <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-glass); font-size: 0.8rem;">
+            <strong>AI Recommendation:</strong> 72% of classes show peak concentration between 09:30 AM and 11:30 AM. High-difficulty subjects scheduled in this window.
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Adaptive Timetable Solver & Grid -->
+      <div class="glass-card">
+        <div class="card-title-bar">
+          <h3><i class="fa-solid fa-calendar-days" style="color: var(--accent-primary);"></i> AI Adaptive Timetable Constraint Solver</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Real-time Graph Optimization Engine</span>
+        </div>
+
+        <!-- Slider Controls -->
+        <div class="timetable-controls-bar">
+          <div class="slider-group">
+            <label>Concentration Weight: <span id="val-concentration">85%</span></label>
+            <input type="range" id="slider-concentration" min="10" max="100" value="85" oninput="updateSliderVal('concentration', this.value)">
+          </div>
+          <div class="slider-group">
+            <label>Teacher Absence Factor: <span id="val-teacher">0%</span></label>
+            <input type="range" id="slider-teacher" min="0" max="50" value="0" oninput="updateSliderVal('teacher', this.value)">
+          </div>
+          <div class="slider-group">
+            <label>Exam Proximity Boost: <span id="val-exam">Low</span></label>
+            <input type="range" id="slider-exam" min="1" max="3" value="1" oninput="updateSliderVal('exam', this.value)">
+          </div>
+          <div style="display: flex; align-items: flex-end; gap: 0.5rem;">
+            <button class="btn-primary" onclick="recalculateTimetable()"><i class="fa-solid fa-arrows-rotate"></i> Re-Calculate Schedule</button>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="timetable-grid-table">
+            <thead>
+              <tr>
+                <th>Time Slot</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+              </tr>
+            </thead>
+            <tbody id="timetable-tbody">
+              <!-- Dynamically Populated by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================================
+         2. FACULTY DASHBOARD
+         =================================================================== -->
+    <section id="faculty-view" class="dashboard-view">
+      <div class="view-header">
+        <div>
+          <h2><i class="fa-solid fa-chalkboard-user" style="color: var(--accent-cyan);"></i> Faculty Live Teaching Command Center</h2>
+          <p>Classroom Analytics, Attendance & AI Differentiated Homework Generator</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn-secondary" onclick="triggerAttendanceScan()"><i class="fa-solid fa-camera"></i> Face Recognition Scan</button>
+          <button class="btn-primary" onclick="openHomeworkModal()"><i class="fa-solid fa-plus"></i> Generate AI Homework</button>
+        </div>
+      </div>
+
+      <div class="dashboard-main-grid">
+        <!-- Live CV Video Feed Simulation -->
+        <div class="glass-card">
+          <div class="card-title-bar">
+            <h3><i class="fa-solid fa-video" style="color: var(--accent-rose);"></i> Live OpenCV Emotion & Attention Detector Feed</h3>
+            <span class="metric-trend up"><i class="fa-solid fa-circle" style="color: var(--accent-rose);"></i> LIVE CAM 01</span>
+          </div>
+
+          <div class="cv-feed-container">
+            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80" class="cv-video-sim" alt="Classroom Video Stream">
+            <canvas id="cvOverlayCanvas" class="cv-overlay-canvas"></canvas>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 1rem; text-align: center;">
+            <div style="background: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 8px;">
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Focused</div>
+              <div style="font-weight: 700; color: var(--accent-emerald);" id="count-focused">28 Students</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 8px;">
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Confused</div>
+              <div style="font-weight: 700; color: var(--accent-amber);" id="count-confused">6 Students</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 8px;">
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Sleepy/Bored</div>
+              <div style="font-weight: 700; color: var(--accent-rose);" id="count-bored">3 Students</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 8px;">
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Engagement Index</div>
+              <div style="font-weight: 700; color: var(--accent-cyan);" id="live-engagement-score">82%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Smart Seat Recommendation Module -->
+        <div class="glass-card">
+          <div class="card-title-bar">
+            <h3><i class="fa-solid fa-chair" style="color: var(--accent-emerald);"></i> Smart AI Seat Recommendation Matrix</h3>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Optimized by Vision Needs, Hearing, and Peer Learning Pairs.</p>
+
+          <div class="seating-matrix-grid" id="seating-matrix-container">
+            <!-- Populated by app.js -->
+          </div>
+
+          <div style="margin-top: 1rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);">
+            <span><span style="color: var(--accent-emerald);">■</span> Advanced</span>
+            <span><span style="color: var(--accent-cyan);">■</span> Intermediate</span>
+            <span><span style="color: var(--accent-amber);">■</span> Beginner</span>
+            <span><span style="color: var(--accent-rose);">■</span> Front Row Required</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- IoT Environmental Controls & Energy Analytics -->
+      <div class="glass-card">
+        <div class="card-title-bar">
+          <h3><i class="fa-solid fa-sliders" style="color: var(--accent-amber);"></i> Classroom Environmental IoT Automation & Closed-Loop Controls</h3>
+          <span style="font-size: 0.8rem; color: var(--accent-emerald);"><i class="fa-solid fa-microchip"></i> ESP32-CR302 Active</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
+          <div class="iot-controls-list">
+            <div class="iot-control-item">
+              <div class="iot-device-info">
+                <i class="fa-solid fa-snowflake iot-icon"></i>
+                <div>
+                  <div style="font-weight: 600; font-size: 0.9rem;">Smart Air Conditioning</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Target: 23°C (Auto Climate)</div>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked id="toggle-ac" onchange="toggleIoTDevice('AC', this.checked)">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="iot-control-item">
+              <div class="iot-device-info">
+                <i class="fa-solid fa-lightbulb iot-icon" style="color: var(--accent-amber);"></i>
+                <div>
+                  <div style="font-weight: 600; font-size: 0.9rem;">Smart LED Light Grid</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Brightness: 80% (BH1750 Feedback)</div>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked id="toggle-lights" onchange="toggleIoTDevice('Lighting', this.checked)">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="iot-control-item">
+              <div class="iot-device-info">
+                <i class="fa-solid fa-wind iot-icon" style="color: var(--accent-emerald);"></i>
+                <div>
+                  <div style="font-weight: 600; font-size: 0.9rem;">CO₂ Fresh Air Ventilation</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">MQ-135 Reading: 680 PPM</div>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked id="toggle-co2" onchange="toggleIoTDevice('Ventilation', this.checked)">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div style="height: 220px;">
+            <canvas id="facultyEnergyChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================================
+         3. STUDENT DASHBOARD
+         =================================================================== -->
+    <section id="student-view" class="dashboard-view">
+      <div class="view-header">
+        <div>
+          <h2><i class="fa-solid fa-user-graduate" style="color: var(--accent-emerald);"></i> Student Personal Learning Dashboard</h2>
+          <p>Welcome back, <strong>Rahul Sharma</strong> | Level 12 Academic Explorer</p>
+        </div>
+        <div class="badge-list">
+          <div class="badge-item"><span class="badge-icon">🔥</span> 7 Day Streak</div>
+          <div class="badge-item"><span class="badge-icon">⚡</span> 1,450 XP</div>
+          <div class="badge-item"><span class="badge-icon">🏆</span> Top 5% Focus</div>
+        </div>
+      </div>
+
+      <!-- Top Student Cards -->
+      <div class="metrics-grid">
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>Performance Index</p>
+              <h3>88.5<span style="font-size: 1rem;">/100</span></h3>
+              <span class="metric-trend up">Category: Advanced</span>
+            </div>
+            <div class="metric-icon icon-emerald"><i class="fa-solid fa-award"></i></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>Attendance Rate</p>
+              <h3>96.2%</h3>
+              <span class="metric-trend up">25 / 26 Sessions</span>
+            </div>
+            <div class="metric-icon icon-cyan"><i class="fa-solid fa-calendar-check"></i></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>Pending Assignments</p>
+              <h3>2 <span style="font-size: 1rem; color: var(--text-muted);">Due Soon</span></h3>
+              <span class="metric-trend down">AI Differentiated</span>
+            </div>
+            <div class="metric-icon icon-amber"><i class="fa-solid fa-pen-ruler"></i></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>Class Focus Score</p>
+              <h3>91.0%</h3>
+              <span class="metric-trend up"><i class="fa-solid fa-eye"></i> Peak Attention</span>
+            </div>
+            <div class="metric-icon icon-purple"><i class="fa-solid fa-bolt"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-main-grid">
+        <!-- Personalized AI Schedule & Homework -->
+        <div class="glass-card">
+          <div class="card-title-bar">
+            <h3><i class="fa-solid fa-book-open" style="color: var(--accent-primary);"></i> AI Lecture Summaries & Auto-Generated Flashcards</h3>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong style="color: var(--accent-cyan);">Physics: Quantum Mechanics & Wave Equations</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Lecture Today @ 10:00 AM</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              <strong>Summary:</strong> Explored Schrödinger's time-dependent wave equation, wave-particle duality, and probability density functions in 3D potential wells.
+            </p>
+            <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn-secondary" style="font-size: 0.75rem; padding: 4px 10px;" onclick="openSummaryModal('formula')"><i class="fa-solid fa-square-root-variable"></i> Key Formulas</button>
+              <button class="btn-secondary" style="font-size: 0.75rem; padding: 4px 10px;" onclick="openSummaryModal('flashcard')"><i class="fa-solid fa-clone"></i> 5 AI Flashcards</button>
+              <button class="btn-secondary" style="font-size: 0.75rem; padding: 4px 10px;" onclick="openSummaryModal('quiz')"><i class="fa-solid fa-circle-question"></i> Practice MCQ</button>
+            </div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); padding: 1rem; border-radius: var(--radius-md);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong style="color: var(--accent-emerald);">Computer Science: Neural Network Optimization</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Lecture Yesterday</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              <strong>Summary:</strong> Covers Stochastic Gradient Descent (SGD), Adam Optimizer, learning rate decay schedules, and momentum vectors.
+            </p>
+          </div>
+        </div>
+
+        <!-- Student Radar & Performance Graph -->
+        <div class="glass-card">
+          <div class="card-title-bar">
+            <h3><i class="fa-solid fa-bullseye" style="color: var(--accent-violet);"></i> Subject Proficiency Radar</h3>
+          </div>
+          <div style="height: 260px;">
+            <canvas id="studentRadarChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================================
+         4. PARENT DASHBOARD
+         =================================================================== -->
+    <section id="parent-view" class="dashboard-view">
+      <div class="view-header">
+        <div>
+          <h2><i class="fa-solid fa-people-roof" style="color: var(--accent-amber);"></i> Parent Monitoring & AI Progress Portal</h2>
+          <p>Monitoring Student: <strong>Rahul Sharma</strong> | Section: B.Tech CSE (Sem 6)</p>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>Overall Progress</p>
+              <h3>88.5%</h3>
+              <span class="metric-trend up">Top 10% in Class</span>
+            </div>
+            <div class="metric-icon icon-emerald"><i class="fa-solid fa-graduation-cap"></i></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>Classroom Engagement</p>
+              <h3>89.4%</h3>
+              <span class="metric-trend up"><i class="fa-solid fa-face-smile"></i> High Attention</span>
+            </div>
+            <div class="metric-icon icon-purple"><i class="fa-solid fa-heart-pulse"></i></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="metric-card-content">
+            <div class="metric-info">
+              <p>Assignment Completion</p>
+              <h3>98.0%</h3>
+              <span class="metric-trend up">On Time</span>
+            </div>
+            <div class="metric-icon icon-cyan"><i class="fa-solid fa-list-check"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-main-grid">
+        <div class="glass-card">
+          <div class="card-title-bar">
+            <h3><i class="fa-solid fa-chart-column" style="color: var(--accent-cyan);"></i> Weekly Engagement & Focus History</h3>
+          </div>
+          <div style="height: 260px;">
+            <canvas id="parentEngagementTrendChart"></canvas>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-title-bar">
+            <h3><i class="fa-solid fa-bell-concierge" style="color: var(--accent-amber);"></i> AI Parent Insights & Recommendations</h3>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.85rem;">
+            <div style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid var(--accent-emerald); padding: 0.75rem;">
+              <strong>Academic Strength:</strong> Rahul exhibits 94% focus during Practical Coding sessions. High interest in Machine Learning.
+            </div>
+            <div style="background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--accent-amber); padding: 0.75rem;">
+              <strong>Improvement Area:</strong> Concentration tends to decrease slightly on Friday afternoon math sessions. 15-min practice recommended.
+            </div>
+            <div style="background: rgba(99, 102, 241, 0.1); border-left: 3px solid var(--accent-primary); padding: 0.75rem;">
+              <strong>Teacher Note:</strong> Active participant in peer-tutoring groups. Selected as Smart Seat Captain.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================
+       FLOATING AI TUTOR CHATBOT DRAWER
+       =================================================================== -->
+  <div class="ai-chat-drawer">
+    <button class="ai-fab" onclick="toggleAiChat()" title="Open AI Cognitive Assistant">
+      <i class="fa-solid fa-robot"></i>
+    </button>
+
+    <div class="ai-chat-box" id="aiChatBox">
+      <div class="ai-chat-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-brain" style="color: var(--accent-cyan);"></i>
+          <div>
+            <div style="font-weight: 700; font-size: 0.9rem;">AI Cognitive Assistant</div>
+            <div style="font-size: 0.7rem; color: var(--accent-emerald);">Online | Doubts, Summaries, Quizzes</div>
+          </div>
+        </div>
+        <button style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.1rem;" onclick="toggleAiChat()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="ai-chat-messages" id="chatMessageContainer">
+        <div class="chat-msg bot">
+          Hello! I am your AI Cognitive Classroom Assistant. How can I help you today?
+          <br><br>
+          <em>Try asking: "Explain Schrödinger's Equation" or "Generate a 3-question quiz on Neural Networks".</em>
+        </div>
+      </div>
+
+      <div class="ai-chat-input-area">
+        <input type="text" id="chatInputText" placeholder="Type doubt or request..." onkeypress="handleChatKeyPress(event)">
+        <button class="btn-primary" style="padding: 0.6rem 0.85rem;" onclick="sendChatMessage()">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JavaScript Codebase -->
+  <script src="app.js"></script>
+</body>
+</html>
